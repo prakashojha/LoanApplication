@@ -15,6 +15,10 @@
 		B6B282C62CC9CF50008F492A /* LoanApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B282C52CC9CF50008F492A /* LoanApplicationTests.swift */; };
 		B6B282D02CC9CF50008F492A /* LoanApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B282CF2CC9CF50008F492A /* LoanApplicationUITests.swift */; };
 		B6B282D22CC9CF50008F492A /* LoanApplicationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B282D12CC9CF50008F492A /* LoanApplicationUITestsLaunchTests.swift */; };
+		B6B282E02CC9D113008F492A /* LoanApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B282DF2CC9D113008F492A /* LoanApplicationViewController.swift */; };
+		B6B282E32CC9D251008F492A /* PersonalInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B282E22CC9D251008F492A /* PersonalInformationView.swift */; };
+		B6B282E72CC9DDB3008F492A /* LATextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B282E62CC9DDB3008F492A /* LATextField.swift */; };
+		B6B282E92CC9E75B008F492A /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B282E82CC9E75B008F492A /* View+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,10 @@
 		B6B282CB2CC9CF50008F492A /* LoanApplicationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoanApplicationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6B282CF2CC9CF50008F492A /* LoanApplicationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanApplicationUITests.swift; sourceTree = "<group>"; };
 		B6B282D12CC9CF50008F492A /* LoanApplicationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanApplicationUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B6B282DF2CC9D113008F492A /* LoanApplicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanApplicationViewController.swift; sourceTree = "<group>"; };
+		B6B282E22CC9D251008F492A /* PersonalInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationView.swift; sourceTree = "<group>"; };
+		B6B282E62CC9DDB3008F492A /* LATextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LATextField.swift; sourceTree = "<group>"; };
+		B6B282E82CC9E75B008F492A /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +105,7 @@
 		B6B282AD2CC9CF4C008F492A /* LoanApplication */ = {
 			isa = PBXGroup;
 			children = (
+				B6B282DE2CC9D0F1008F492A /* Presentation */,
 				B6B282AE2CC9CF4C008F492A /* AppDelegate.swift */,
 				B6B282B02CC9CF4C008F492A /* SceneDelegate.swift */,
 				B6B282B22CC9CF4C008F492A /* ViewController.swift */,
@@ -122,6 +131,41 @@
 				B6B282D12CC9CF50008F492A /* LoanApplicationUITestsLaunchTests.swift */,
 			);
 			path = LoanApplicationUITests;
+			sourceTree = "<group>";
+		};
+		B6B282DE2CC9D0F1008F492A /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B6B282E42CC9DD82008F492A /* Shared */,
+				B6B282E12CC9D217008F492A /* View */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B6B282E12CC9D217008F492A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B6B282DF2CC9D113008F492A /* LoanApplicationViewController.swift */,
+				B6B282E22CC9D251008F492A /* PersonalInformationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B6B282E42CC9DD82008F492A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B6B282E52CC9DD8C008F492A /* View */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		B6B282E52CC9DD8C008F492A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B6B282E62CC9DDB3008F492A /* LATextField.swift */,
+				B6B282E82CC9E75B008F492A /* View+Extension.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,9 +298,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6B282E72CC9DDB3008F492A /* LATextField.swift in Sources */,
 				B6B282B32CC9CF4C008F492A /* ViewController.swift in Sources */,
+				B6B282E32CC9D251008F492A /* PersonalInformationView.swift in Sources */,
 				B6B282AF2CC9CF4C008F492A /* AppDelegate.swift in Sources */,
 				B6B282B12CC9CF4C008F492A /* SceneDelegate.swift in Sources */,
+				B6B282E92CC9E75B008F492A /* View+Extension.swift in Sources */,
+				B6B282E02CC9D113008F492A /* LoanApplicationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,7 +478,6 @@
 				INFOPLIST_FILE = LoanApplication/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -458,7 +505,6 @@
 				INFOPLIST_FILE = LoanApplication/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
