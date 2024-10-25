@@ -12,6 +12,7 @@ class LAUITextField: UITextField {
     
     let edgeInsets: UIEdgeInsets
     let placeHolderText: String
+    let textFieldFontSize: CGFloat = 18
     
     init(edgeInsets: UIEdgeInsets = .init(top: 0, left: 12, bottom: 0, right: 12), _ placeHolderText: String) {
         self.edgeInsets = edgeInsets
@@ -22,6 +23,7 @@ class LAUITextField: UITextField {
         self.layer.borderWidth = 1.5
         self.layer.borderColor = UIColor.lightGray.cgColor
         self.placeholder = placeHolderText
+        self.font = UIFont.systemFont(ofSize: textFieldFontSize, weight: .medium)
     }
     
     required init?(coder: NSCoder) {
