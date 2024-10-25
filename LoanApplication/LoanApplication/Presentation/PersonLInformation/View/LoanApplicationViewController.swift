@@ -61,9 +61,12 @@ class LoanApplicationViewController: UIViewController, HideKeyboardProtocol, Sho
     
     func setConstraints() {
         personalInformationView.translatesAutoresizingMaskIntoConstraints = false
-        personalInformationView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        personalInformationView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        personalInformationView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -80).isActive = true
+        NSLayoutConstraint.activate([
+            personalInformationView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            personalInformationView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            personalInformationView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -20)
+        
+        ])
         
     }
 }
