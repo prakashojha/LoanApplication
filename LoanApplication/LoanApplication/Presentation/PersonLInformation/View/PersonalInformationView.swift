@@ -23,47 +23,41 @@ class PersonalInformationView: UIView {
         return view
     }()
     
-    private lazy var firstNameView: LAUITextField = {
-        let view: LAUITextField = LAUITextField(viewModel.firstName)
-        view.delegate = self
+    private lazy var firstNameView: LAUIInputField = {
+        let view: LAUIInputField = LAUIInputField(viewModel.firstName, labelText: "Full Name")
+        view.textField.delegate = self
         return view
     }()
     
-    private lazy var emailAddressView: LAUITextField = {
-        let view: LAUITextField = LAUITextField(viewModel.email)
-        view.autocapitalizationType = .none
-        view.delegate = self
+    private lazy var emailAddressView: LAUIInputField = {
+        let view: LAUIInputField = LAUIInputField(viewModel.email, labelText: "Email Address")
+        view.textField.autocapitalizationType = .none
+        view.textField.delegate = self
         return view
     }()
     
-    private lazy var phoneNumberView: LAUITextField = {
-        let view: LAUITextField = LAUITextField(viewModel.phoneNumber)
-        view.keyboardType = .phonePad
-        view.delegate = self
+    private lazy var phoneNumberView: LAUIInputField = {
+        let view: LAUIInputField = LAUIInputField(viewModel.phoneNumber, labelText: "Phone Number (+64 123 456 789)")
+        view.textField.keyboardType = .phonePad
+        view.textField.delegate = self
         return view
     }()
     
-    private lazy var genderView: LAUITextField = {
-        let view: LAUITextField = LAUITextField(viewModel.gender)
-        view.text = viewModel.genders[0]
-        view.inputView = pickerView
-        view.delegate = self
+    private lazy var genderView: LAUIInputField = {
+        let view: LAUIInputField = LAUIInputField(viewModel.gender, labelText: "Select Gender")
+        view.textField.text = viewModel.genders[0]
+        view.textField.inputView = pickerView
+        view.textField.delegate = self
         return view
     }()
     
-    private lazy var addressView: LAUITextField = {
-        let view: LAUITextField = LAUITextField(viewModel.address)
+    private lazy var addressView: LAUIInputField = {
+        let view: LAUIInputField = LAUIInputField(viewModel.address, labelText: "Postal Address")
         return view
     }()
     
-    private lazy var button: UIView = {
-        let button = UIButton(type: .system)
-        button.tintColor = .white
-        button.setTitle("Next", for: .normal)
-        button.layer.cornerRadius = 20
-        button.layer.masksToBounds = true
-        button.backgroundColor = .systemBlue
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+    private lazy var button: LAUIButton = {
+        let button = LAUIButton(configuration: .personalInformationCustomButton)
         button.addTarget(self, action: #selector(onNextButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -82,7 +76,13 @@ class PersonalInformationView: UIView {
     }
     
     @objc func onNextButtonPressed() {
-        viewModel.onNextButtonPressed(firstNameView.text, emailAddressView.text, phoneNumberView.text, genderView.text, addressView.text)
+        viewModel.onNextButtonPressed(
+            firstNameView.textField.text,
+            emailAddressView.textField.text,
+            phoneNumberView.textField.text,
+            genderView.textField.text,
+            addressView.textField.text
+        )
     }
     
     func setupView() {
@@ -137,7 +137,6 @@ class PersonalInformationView: UIView {
         
         ])
     }
-    
 }
 
 extension PersonalInformationView: UITextFieldDelegate {
@@ -154,8 +153,8 @@ extension PersonalInformationView: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        genderView.text = viewModel.genders[row]
-        genderView.resignFirstResponder()
+        genderView.textField.text = viewModel.genders[row]
+        genderView.textField.resignFirstResponder()
     }
 }
 
@@ -171,6 +170,6 @@ extension PersonalInformationView: UIPickerViewDataSource {
 
 extension PersonalInformationView: PersonalInformationDelegate {
     func updatePhoneNumber(withNumber: String) {
-        self.phoneNumberView.text = withNumber
+        self.phoneNumberView.textField.text = withNumber
     }
 }
