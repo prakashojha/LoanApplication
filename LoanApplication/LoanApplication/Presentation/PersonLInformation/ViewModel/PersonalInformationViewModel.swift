@@ -24,7 +24,7 @@ final class PersonalInformationViewModel {
     
     let genders: [String] = ["Male", "Female"]
     let gapBetween: CGFloat = 15.0
-    let viewHeight: CGFloat = 60.0
+    let viewHeight: CGFloat = 78.0
     let gapLeft: CGFloat = 12.0
     let gapRight: CGFloat = 12.0
     
