@@ -15,11 +15,11 @@ struct PersonalInformationModel {
     var address: String
     
     init(
-        firstName: String = "First Name",
-        email: String = "email@domain.com",
+        firstName: String = "John Doe",
+        email: String = "john@tbs.co.nz",
         phoneNumber: String = "+64220764933",
         gender: String = "Male",
-        address: String = "Postal Address"
+        address: String = "66 collins street, taranaki"
     ) {
         self.firstName = firstName
         self.email = email
