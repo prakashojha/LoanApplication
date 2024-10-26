@@ -10,7 +10,7 @@ import UIKit
 class LAUIButton: UIButton {
     
     // Custom initializer with configuration
-    init(configuration: UIButton.Configuration) {
+    init(configuration: UIButton.Configuration?=nil) {
         super.init(frame: .zero)
         applyCustomConfiguration(configuration)
     }
@@ -20,8 +20,10 @@ class LAUIButton: UIButton {
     }
     
     // Apply the configuration and enforce tintAdjustmentMode
-    private func applyCustomConfiguration(_ configuration: UIButton.Configuration) {
-        self.configuration = configuration
+    private func applyCustomConfiguration(_ configuration: UIButton.Configuration?) {
+        if let configuration = configuration {
+            self.configuration = configuration
+        }
         self.tintAdjustmentMode = .normal // Prevents color change when alert is presented
     }
 }
@@ -29,17 +31,33 @@ class LAUIButton: UIButton {
 
 extension UIButton.Configuration {
     
-    static var personalInformationCustomButton: UIButton.Configuration {
+    static func navigationCustomButton(title: String) -> UIButton.Configuration {
         var container = AttributeContainer()
-        container.font = UIFont.boldSystemFont(ofSize: 28)
+        container.font = UIFont.boldSystemFont(ofSize: 18)
         
         var config = UIButton.Configuration.filled()
         config.titleAlignment = .center
         config.baseBackgroundColor = .systemBlue
         config.baseForegroundColor = .white
-        config.background.strokeColor = .lightGray
-        config.background.strokeWidth = 2.0
-        config.cornerStyle = .capsule
+        //config.background.strokeColor = .lightGray
+        //config.background.strokeWidth = 2.0
+        config.cornerStyle = .medium
+        config.attributedTitle = AttributedString(title, attributes: container)
+        
+        return config
+    }
+    
+    static var personalInformationCustomButton: UIButton.Configuration {
+        var container = AttributeContainer()
+        container.font = UIFont.boldSystemFont(ofSize: 18)
+        
+        var config = UIButton.Configuration.filled()
+        config.titleAlignment = .center
+        config.baseBackgroundColor = .systemBlue
+        config.baseForegroundColor = .white
+        //config.background.strokeColor = .lightGray
+        //config.background.strokeWidth = 2.0
+        config.cornerStyle = .medium
         config.attributedTitle = AttributedString("Next", attributes: container)
         
         return config
