@@ -8,65 +8,81 @@
 import Foundation
 import UIKit
 
-enum Screens {
-    case PersonalInformationScreen
-    case FinancialInformationScreen
+enum Screen {
+    case PersonalInformationScreen(model: LoanApplicationModel.PersonalInformationModel)
+    case FinancialInformationScreen(model: LoanApplicationModel.FinancialInformationModel)
     case ReviewAndSubmitScreen
     case HomeScreen
 }
 
 protocol Coordinator {
-    var childCoordinators: [Coordinator] { get}
+    var navigationController: UINavigationController { get set }
+    // Starts the coordinator flow
     func start()
-    
 }
 
 class AppCoordinator: Coordinator {
-    let window: UIWindow
-    private(set) var childCoordinators: [Coordinator] = []
-    let navigationController: UINavigationController = UINavigationController()
+    var navigationController: UINavigationController
+    private var loanApplicationViewController: LoanApplicationViewController!
     
-    init(window: UIWindow) {
-        self.window = window
+    var loanApplicationData: LoanApplicationModel
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+        loanApplicationData = LoanApplicationModel()
     }
+    
     func start() {
-        presentPersonalInformationScreen()
+        let viewModel = LoanApplicationViewModel(coordinator: self, loanApplicationData: loanApplicationData)
+        loanApplicationViewController = LoanApplicationViewController(viewModel: viewModel)
+       
+        navigationController.pushViewController(loanApplicationViewController, animated: true)
+        showPersonalInformationScreen(model: viewModel.getPersonalInformationModel(), animated: false)
     }
     
-    func presentPersonalInformationScreen() {
-        let model = PersonalInformationModel()
+    // Show Personal Info Screen
+    private func showPersonalInformationScreen(model: LoanApplicationModel.PersonalInformationModel, animated: Bool, slideOut: Bool = false) {
+        //let model = loanApplicationViewModel.getPersonalInformationModel()
         let viewModel = PersonalInformationViewModel(model: model, coordinator: self)
-        let viewController = LoanApplicationViewController(viewModel: viewModel)
-        
-        navigationController.setViewControllers([viewController], animated: false)
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
+        let personalVC = PersonalInformationViewController(viewModel: viewModel)
+        loanApplicationViewController.transitionToViewController(personalVC, progressIndex: 0, animated: animated, isBackward: slideOut)
     }
     
-    func presentFinancialInformationScreen() {
-        let viewController = FinancialInformationViewController()
-        self.navigationController.pushViewController(viewController, animated: true)
+    private func showFinancialInformationScreen(model: LoanApplicationModel.FinancialInformationModel, animated: Bool, slideOut: Bool = false) {
+        //let model = loanApplicationViewModel.getFinancialInformationModel()
+        let viewModel = FinancialInformationViewModel(model: model, coordinator: self)
+        let financialVC = FinancialInformationViewController(viewModel: viewModel)
+        loanApplicationViewController.transitionToViewController(financialVC, progressIndex: 1, animated: animated, isBackward: slideOut)
     }
     
-    func presentReviewAndSubmitScreen() {
-        
-    }
-    
-    func presentHomeScreen() {
-        
-    }
-    
-    func loadNextScreen(screen: Screens) {
-        switch(screen){
+    func loadNextScreen(fromScreen: Screen) {
+        switch(fromScreen) {
             
-        case .PersonalInformationScreen:
-            presentFinancialInformationScreen()
-        case .FinancialInformationScreen:
-            presentReviewAndSubmitScreen()
+        case let .PersonalInformationScreen(model):
+            loanApplicationData.personalInfo = model
+            showFinancialInformationScreen(model: loanApplicationData.financialInfo, animated: true)
+        case let .FinancialInformationScreen(model):
+            loanApplicationData.financialInfo = model
         case .ReviewAndSubmitScreen:
-            presentHomeScreen()
+            break
         case .HomeScreen:
-            presentPersonalInformationScreen()
+            break
         }
     }
+    
+    func loadPreviousScreen(fromScreen: Screen) {
+        switch(fromScreen) {
+            
+        case let .PersonalInformationScreen(model):
+            break
+        case let .FinancialInformationScreen(model):
+            loanApplicationData.financialInfo = model
+            showPersonalInformationScreen(model: loanApplicationData.personalInfo, animated: true, slideOut: true)
+        case .ReviewAndSubmitScreen:
+            break
+        case .HomeScreen:
+            break
+        }
+    }
+    
 }
