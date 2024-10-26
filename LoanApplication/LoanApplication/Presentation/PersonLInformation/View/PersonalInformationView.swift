@@ -24,20 +24,20 @@ class PersonalInformationView: UIView {
     }()
     
     private lazy var firstNameView: LAUIInputField = {
-        let view: LAUIInputField = LAUIInputField(viewModel.firstName, labelText: "Full Name")
+        let view: LAUIInputField = LAUIInputField("John Doe", viewModel.firstName, labelText: "Full Name")
         view.textField.delegate = self
         return view
     }()
     
     private lazy var emailAddressView: LAUIInputField = {
-        let view: LAUIInputField = LAUIInputField(viewModel.email, labelText: "Email Address")
+        let view: LAUIInputField = LAUIInputField("Joe@tsb.co.nz", viewModel.email, labelText: "Email Address")
         view.textField.autocapitalizationType = .none
         view.textField.delegate = self
         return view
     }()
     
     private lazy var phoneNumberView: LAUIInputField = {
-        let view: LAUIInputField = LAUIInputField(viewModel.phoneNumber, labelText: "Phone Number (+64 123 456 789)")
+        let view: LAUIInputField = LAUIInputField("+64220845922",viewModel.phoneNumber, labelText: "Phone Number (+64 123 456 789)")
         view.textField.keyboardType = .phonePad
         view.textField.delegate = self
         return view
@@ -52,7 +52,7 @@ class PersonalInformationView: UIView {
     }()
     
     private lazy var addressView: LAUIInputField = {
-        let view: LAUIInputField = LAUIInputField(viewModel.address, labelText: "Postal Address")
+        let view: LAUIInputField = LAUIInputField("66 Collins Street", viewModel.address, labelText: "Postal Address")
         return view
     }()
     
@@ -65,7 +65,6 @@ class PersonalInformationView: UIView {
     init(viewModel: PersonalInformationViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
-        self.viewModel.delegate = self
         
         setupView()
         setupConstraints()
@@ -128,12 +127,11 @@ class PersonalInformationView: UIView {
             addressView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -viewModel.gapRight),
             addressView.heightAnchor.constraint(equalToConstant: viewModel.viewHeight),
             
-            button.topAnchor.constraint(equalTo: addressView.bottomAnchor, constant: 50),
+            button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30),
             button.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 32),
             button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -32),
-            button.heightAnchor.constraint(equalToConstant: 56),
+            button.heightAnchor.constraint(equalToConstant: 44),
             button.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            button.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         
         ])
     }
