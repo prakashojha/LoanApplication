@@ -11,13 +11,14 @@ import UIKit
 class LAUIInputField: UIView {
     let edgeInsets: UIEdgeInsets
     let placeHolderText: String
+    let textFieldText: String?
     let labelText: String
     
     let labelViewHeight: CGFloat = 18
     let labelFontSize: CGFloat = 14
     
     lazy var textField: LAUITextField = {
-        let view = LAUITextField(edgeInsets: self.edgeInsets, self.placeHolderText)
+        let view = LAUITextField(edgeInsets: self.edgeInsets, self.placeHolderText, self.textFieldText)
         return view
     }()
     
@@ -29,9 +30,10 @@ class LAUIInputField: UIView {
         return view
     }()
     
-    init(edgeInsets: UIEdgeInsets = .init(top: 0, left: 12, bottom: 0, right: 12), _ placeHolderText: String, labelText: String) {
+    init(edgeInsets: UIEdgeInsets = .init(top: 0, left: 12, bottom: 0, right: 12), _ placeHolderText: String, _ textFieldText: String? = nil, labelText: String) {
         self.edgeInsets = edgeInsets
         self.placeHolderText = placeHolderText
+        self.textFieldText = textFieldText
         self.labelText = labelText
         super.init(frame: .zero)
         
