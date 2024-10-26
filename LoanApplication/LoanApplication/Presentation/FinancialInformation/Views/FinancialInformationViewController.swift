@@ -7,17 +7,28 @@
 
 import UIKit
 
-class FinancialInformationViewController: UIViewController, HideKeyboardProtocol {
+class FinancialInformationViewController: UIViewController, HideKeyboardProtocol, ShowAlertProtocol {
     
-    let viewModel: FinancialInformationViewModel = FinancialInformationViewModel()
+    let viewModel: FinancialInformationViewModel
 
     private lazy var financialInformationView: FinancialInformationView = {
+        viewModel.alertMessage = { (message, completion) in
+            self.showAlert(with: message, completion: completion)
+        }
         return FinancialInformationView(viewModel: viewModel)
     }()
     
+    init(viewModel: FinancialInformationViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .yellow
         navigationItem.title = "Financial Information"
         addView()
         setConstraints()
@@ -50,10 +61,12 @@ class FinancialInformationViewController: UIViewController, HideKeyboardProtocol
     
     func setConstraints() {
         financialInformationView.translatesAutoresizingMaskIntoConstraints = false
-        financialInformationView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        financialInformationView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        financialInformationView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -80).isActive = true
-        
+        NSLayoutConstraint.activate([
+            financialInformationView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            financialInformationView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            financialInformationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            financialInformationView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
 
 }
