@@ -24,7 +24,7 @@ class PersonalInformationView: UIView {
     }()
     
     private lazy var firstNameView: LAUIInputField = {
-        let view: LAUIInputField = LAUIInputField("John Doe", viewModel.firstName, labelText: "Full Name")
+        let view: LAUIInputField = LAUIInputField("John Doe", viewModel.fullName, labelText: "Full Name")
         view.textField.delegate = self
         return view
     }()
