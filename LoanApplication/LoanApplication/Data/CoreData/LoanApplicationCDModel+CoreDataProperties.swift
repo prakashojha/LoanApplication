@@ -18,13 +18,14 @@ extension LoanApplicationCDModel {
 
     @NSManaged public var address: String?
     @NSManaged public var annualIncome: String?
+    @NSManaged public var dateSubmitted: Date?
     @NSManaged public var desiredLoanAmount: String?
     @NSManaged public var email: String?
     @NSManaged public var fullName: String?
     @NSManaged public var gender: String?
     @NSManaged public var irdNumber: String?
     @NSManaged public var phoneNumber: String?
-    @NSManaged public var dateSubmitted: Date?
+    @NSManaged public var applicant: PersonCDModel?
 
 }
 
