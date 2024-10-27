@@ -10,5 +10,9 @@
         <attribute name="gender" attributeType="String"/>
         <attribute name="irdNumber" attributeType="String"/>
         <attribute name="phoneNumber" attributeType="String"/>
+        <relationship name="applicant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PersonCDModel" inverseName="loans" inverseEntity="PersonCDModel"/>
+    </entity>
+    <entity name="PersonCDModel" representedClassName="PersonCDModel" syncable="YES">
+        <relationship name="loans" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LoanApplicationCDModel" inverseName="applicant" inverseEntity="LoanApplicationCDModel"/>
     </entity>
 </model>
