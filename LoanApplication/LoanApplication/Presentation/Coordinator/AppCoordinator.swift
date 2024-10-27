@@ -37,7 +37,8 @@ class AppCoordinator: Coordinator {
         loanApplicationViewController = LoanApplicationViewController(viewModel: viewModel)
        
         navigationController.pushViewController(loanApplicationViewController, animated: true)
-        showPersonalInformationScreen(model: viewModel.getPersonalInformationModel(), animated: false)
+        //showPersonalInformationScreen(model: viewModel.getPersonalInformationModel(), animated: false)
+        showReviewAndSubmitScreen(model: loanApplicationData, animated: false)
     }
     
     // Show Personal Info Screen
@@ -55,6 +56,12 @@ class AppCoordinator: Coordinator {
         loanApplicationViewController.transitionToViewController(financialVC, progressIndex: 1, animated: animated, isBackward: slideOut)
     }
     
+    func showReviewAndSubmitScreen(model: LoanApplicationModel, animated: Bool, slideOut: Bool = false) {
+        let viewModel = ReviewAndSubmitViewModel(loanApplicationModel: model, coordinator: self)
+        let viewController = ReviewAndSubmitViewController(viewModel: viewModel)
+        loanApplicationViewController.transitionToViewController(viewController, progressIndex: 2, animated: animated, isBackward: slideOut)
+    }
+    
     func loadNextScreen(fromScreen: Screen) {
         switch(fromScreen) {
             
@@ -63,6 +70,7 @@ class AppCoordinator: Coordinator {
             showFinancialInformationScreen(model: loanApplicationData.financialInfo, animated: true)
         case let .FinancialInformationScreen(model):
             loanApplicationData.financialInfo = model
+            showReviewAndSubmitScreen(model: loanApplicationData, animated: true)
         case .ReviewAndSubmitScreen:
             break
         case .HomeScreen:
@@ -73,7 +81,7 @@ class AppCoordinator: Coordinator {
     func loadPreviousScreen(fromScreen: Screen) {
         switch(fromScreen) {
             
-        case let .PersonalInformationScreen(model):
+        case .PersonalInformationScreen(_):
             break
         case let .FinancialInformationScreen(model):
             loanApplicationData.financialInfo = model

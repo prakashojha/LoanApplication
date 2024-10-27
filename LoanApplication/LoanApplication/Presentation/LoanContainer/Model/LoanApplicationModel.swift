@@ -26,11 +26,11 @@ struct LoanApplicationModel {
         var address: String
         
         init(
-            fullName: String = "",
-            email: String = "",
-            phoneNumber: String = "",
-            gender: String = "",
-            address: String = ""
+            fullName: String = "John Doe",
+            email: String = "jonhdoe@gmail.com",
+            phoneNumber: String = "+64229875477",
+            gender: String = "Male",
+            address: String = "1 Alliance lane"
         ) {
             self.fullName = fullName
             self.email = email
