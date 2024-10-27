@@ -93,4 +93,14 @@ struct Helper {
         }
         return result
     }
+    
+    static func formatDate(_ date: Date?) -> String? {
+        guard let date = date else { return nil }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMM yyyy 'at' h:mm a"
+        dateFormatter.amSymbol = "am"
+        dateFormatter.pmSymbol = "pm"
+        return dateFormatter.string(from: date)
+    }
+
 }

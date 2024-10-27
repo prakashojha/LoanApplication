@@ -17,6 +17,8 @@
 		B61CE7662CCE020D0088FEF4 /* PersonCDModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61CE7622CCE020D0088FEF4 /* PersonCDModel+CoreDataProperties.swift */; };
 		B61CE7672CCE020D0088FEF4 /* LoanApplicationCDModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61CE7632CCE020D0088FEF4 /* LoanApplicationCDModel+CoreDataClass.swift */; };
 		B61CE7682CCE020D0088FEF4 /* LoanApplicationCDModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61CE7642CCE020D0088FEF4 /* LoanApplicationCDModel+CoreDataProperties.swift */; };
+		B61CE76A2CCE0BF30088FEF4 /* LAUILabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61CE7692CCE0BF30088FEF4 /* LAUILabelView.swift */; };
+		B61CE76D2CCE0F2B0088FEF4 /* HomeScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61CE76C2CCE0F2B0088FEF4 /* HomeScreenModel.swift */; };
 		B6217E372CCAC7730080E858 /* PersonalInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6217E362CCAC7730080E858 /* PersonalInformationViewModel.swift */; };
 		B6217E392CCAD6B80080E858 /* PersonalInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6217E382CCAD6B80080E858 /* PersonalInformationModel.swift */; };
 		B6217E3F2CCB1D1A0080E858 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6217E3E2CCB1D1A0080E858 /* AppCoordinator.swift */; };
@@ -73,6 +75,8 @@
 		B61CE7622CCE020D0088FEF4 /* PersonCDModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonCDModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B61CE7632CCE020D0088FEF4 /* LoanApplicationCDModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoanApplicationCDModel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B61CE7642CCE020D0088FEF4 /* LoanApplicationCDModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoanApplicationCDModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B61CE7692CCE0BF30088FEF4 /* LAUILabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAUILabelView.swift; sourceTree = "<group>"; };
+		B61CE76C2CCE0F2B0088FEF4 /* HomeScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenModel.swift; sourceTree = "<group>"; };
 		B6217E362CCAC7730080E858 /* PersonalInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationViewModel.swift; sourceTree = "<group>"; };
 		B6217E382CCAD6B80080E858 /* PersonalInformationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationModel.swift; sourceTree = "<group>"; };
 		B6217E3E2CCB1D1A0080E858 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 		B61CE7532CCDF5DA0088FEF4 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				B61CE76B2CCE0F170088FEF4 /* Model */,
 				B61CE75A2CCDFC300088FEF4 /* ViewModel */,
 				B61CE7592CCDFC280088FEF4 /* View */,
 			);
@@ -191,6 +196,14 @@
 				B61CE75D2CCDFC630088FEF4 /* HomeScreenViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B61CE76B2CCE0F170088FEF4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B61CE76C2CCE0F2B0088FEF4 /* HomeScreenModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B6217E352CCAC7540080E858 /* ViewModel */ = {
@@ -420,6 +433,7 @@
 				B6B282E82CC9E75B008F492A /* View+Extension.swift */,
 				B6217E4A2CCB31990080E858 /* LAUIButton.swift */,
 				B6217E4C2CCB6CFC0080E858 /* LAUIInputField.swift */,
+				B61CE7692CCE0BF30088FEF4 /* LAUILabelView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -567,12 +581,14 @@
 				B6B282AF2CC9CF4C008F492A /* AppDelegate.swift in Sources */,
 				B61CE6FE2CCDAA280088FEF4 /* ReviewAndSubmitModel.swift in Sources */,
 				B61CE75E2CCDFC630088FEF4 /* HomeScreenViewModel.swift in Sources */,
+				B61CE76A2CCE0BF30088FEF4 /* LAUILabelView.swift in Sources */,
 				B6217E492CCB30290080E858 /* FinancialInformationViewModel.swift in Sources */,
 				B6217E4F2CCB7C290080E858 /* FinancialInformationModel.swift in Sources */,
 				B61CE7662CCE020D0088FEF4 /* PersonCDModel+CoreDataProperties.swift in Sources */,
 				B61CE7652CCE020D0088FEF4 /* PersonCDModel+CoreDataClass.swift in Sources */,
 				B66068C42CCC893400D08D20 /* LoanApplicationViewModel.swift in Sources */,
 				B6217E4B2CCB31990080E858 /* LAUIButton.swift in Sources */,
+				B61CE76D2CCE0F2B0088FEF4 /* HomeScreenModel.swift in Sources */,
 				B6217E522CCB7DCD0080E858 /* Helper.swift in Sources */,
 				B66068CA2CCD106B00D08D20 /* ReviewAndSubmitViewController.swift in Sources */,
 				B6217E442CCB247C0080E858 /* FinancialInformationViewController.swift in Sources */,

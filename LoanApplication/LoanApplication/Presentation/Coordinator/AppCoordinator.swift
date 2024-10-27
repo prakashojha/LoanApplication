@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 enum Screen {
     case PersonalInformationScreen(model: LoanApplicationModel.PersonalInformationModel)
@@ -26,6 +27,7 @@ class AppCoordinator: Coordinator {
     private var loanApplicationViewController: LoanApplicationViewController!
     
     var loanApplicationData: LoanApplicationModel
+    let context: NSManagedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -33,12 +35,22 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
+        showHomeScreen()
+    }
+    
+    func LoanApplicationScreen() {
         let viewModel = LoanApplicationViewModel(coordinator: self, loanApplicationData: loanApplicationData)
         loanApplicationViewController = LoanApplicationViewController(viewModel: viewModel)
        
         navigationController.pushViewController(loanApplicationViewController, animated: true)
-        //showPersonalInformationScreen(model: viewModel.getPersonalInformationModel(), animated: false)
-        showReviewAndSubmitScreen(model: loanApplicationData, animated: false)
+        showPersonalInformationScreen(model: viewModel.getPersonalInformationModel(), animated: false)
+        //showReviewAndSubmitScreen(model: loanApplicationData, animated: false)
+    }
+    
+    func showHomeScreen() {
+        let viewModel = HomeScreenViewModel(context: context, coordinator: self)
+        let homeScreenViewController = HomeScreenViewController(viewModel: viewModel)
+        navigationController.pushViewController(homeScreenViewController, animated: true)
     }
     
     // Show Personal Info Screen
@@ -74,7 +86,7 @@ class AppCoordinator: Coordinator {
         case .ReviewAndSubmitScreen:
             break
         case .HomeScreen:
-            break
+            LoanApplicationScreen()
         }
     }
     

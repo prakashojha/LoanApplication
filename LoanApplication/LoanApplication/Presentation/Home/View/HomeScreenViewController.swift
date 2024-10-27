@@ -10,16 +10,14 @@ import UIKit
 class HomeScreenViewController: UIViewController {
 
     let viewModel: HomeScreenViewModel
-    let coordinator: AppCoordinator?
-    
+   
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         return tableView
     }()
     
-    init(viewModel: HomeScreenViewModel, coordinator: AppCoordinator?) {
+    init(viewModel: HomeScreenViewModel) {
         self.viewModel = viewModel
-        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,7 +27,13 @@ class HomeScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .cyan
         setupUI()
+        fetchData()
+    }
+    
+    func fetchData() {
+        viewModel.fetchData()
     }
     
     func setupUI() {
@@ -39,10 +43,13 @@ class HomeScreenViewController: UIViewController {
     func setupTableView() {
         view.addSubview(tableView)
         
-        tableView.register(ReviewAndSubmitViewCell.self, forCellReuseIdentifier: "HomeScreenTableViewCell")
-        tableView.separatorStyle = .singleLine
+        tableView.register(HomeScreenTableViewCell.self, forCellReuseIdentifier: "HomeScreenTableViewCell")
+        tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         tableView.dataSource = self
+        tableView.delegate = self
+        //tableView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+
         /// Cell separator Insets.
         //tableView.separatorInset = UIEdgeInsets(top: 0, left: Constant.shared.iconImageWidth/8, bottom: 0, right: 0)
         tableView.layoutMargins = .zero
@@ -50,24 +57,36 @@ class HomeScreenViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
 }
 
 extension HomeScreenViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
-        //viewModel.numberOfRowsInSection
+        viewModel.numberOfRowsInSection
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeScreenTableViewCell", for: indexPath) as? ReviewAndSubmitViewCell
-        //let summaryItem = viewModel.model[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeScreenTableViewCell", for: indexPath) as? HomeScreenTableViewCell
+        let model = viewModel.cellForAtRow(index: indexPath.row)
+        cell?.cellViewModel = model
         //cell?.model = summaryItem
         return cell ?? UITableViewCell()
+    }
+}
+
+extension HomeScreenViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        100
     }
 }
