@@ -27,7 +27,7 @@ final class PersonalInformationViewModel {
     let gapLeft: CGFloat = 0.0
     let gapRight: CGFloat = 0.0
     
-    var firstName: String {
+    var fullName: String {
         get { model.fullName }
         set { model.fullName = newValue}
     }
@@ -89,22 +89,26 @@ final class PersonalInformationViewModel {
         return trimmedPhoneNumber
     }
    
-    func updateModel(firstName: String, email: String, phoneNumber: String, gender: String, address: String) {
-        self.firstName = firstName
+    func updateModel(_ fullName: String, _ email: String, _ phoneNumber: String, _ gender: String, _ address: String) {
+        self.fullName = fullName
         self.email = email
         self.phoneNumber = phoneNumber
         self.gender = gender
         self.address = address
     }
     
-    func onNextButtonPressed(_ firstName: String?, _ email: String?, _ phoneNumber: String?, _ gender: String?, _ address: String?) {
-
-        guard let firstName = checkFirstNameIsValid(firstName: firstName) else { return }
-        guard let email = checkEmailIsValid(email: email) else { return }
-        guard let phoneNumber = checkPhoneNumberIsValid(phoneNumber: phoneNumber) else { return }
-
-        self.updateModel(firstName: firstName, email: email, phoneNumber: phoneNumber, gender: gender!, address: address ?? "Not provided")
-
+    private func verifyItemsValidity(_ fullName: String?, _ email: String?, _ phoneNumber: String?) -> (String, String, String)? {
+        guard let validFullName = checkFirstNameIsValid(firstName: fullName) else { return nil }
+        guard let validEmail = checkEmailIsValid(email: email) else { return nil }
+        guard let validPhoneNumber = checkPhoneNumberIsValid(phoneNumber: phoneNumber) else { return nil }
+        
+        return (validFullName, validEmail, validPhoneNumber)
+    }
+    
+    func onNextButtonPressed(_ fullName: String?, _ email: String?, _ phoneNumber: String?, _ gender: String?, _ address: String?) {
+        
+        guard let items = verifyItemsValidity(fullName, email, phoneNumber) else { return }
+        updateModel(items.0, items.1, items.2, gender!, address ?? "Not provided")
         loadNextScreen()
     }
     
@@ -112,7 +116,4 @@ final class PersonalInformationViewModel {
         self.coordinator?.loadNextScreen(fromScreen: .PersonalInformationScreen(model: model))
     }
     
-    func loadPreviousScreen() {
-        //self.coordinator?.loadPreviousScreen(screen: Screen.PersonalInformationScreen, loanData: model)
-    }
 }
