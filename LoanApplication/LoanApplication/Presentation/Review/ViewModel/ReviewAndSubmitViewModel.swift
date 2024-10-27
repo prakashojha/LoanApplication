@@ -41,7 +41,9 @@ class ReviewAndSubmitViewModel {
     }
     
     private func createModelForCoreData() -> LoanApplicationCDModel {
+        
         let model = LoanApplicationCDModel(context: context)
+        
         model.fullName = loanApplicationModel.personalInfo.fullName
         model.email = loanApplicationModel.personalInfo.email
         model.phoneNumber = loanApplicationModel.personalInfo.phoneNumber
@@ -56,10 +58,12 @@ class ReviewAndSubmitViewModel {
     }
     
     func onSubmitPressed() {
-        let coreDataModel = createModelForCoreData()
+        let person = PersonCDModel(context: context)
+        let loan = createModelForCoreData()
+        
         do {
-            try saveData(withModel: coreDataModel)
-            
+            try saveData(person: person, loan: loan)
+            print("Saved Successfully")
         }
         catch(let error) {
             showAlert?(error.localizedDescription)
@@ -70,7 +74,8 @@ class ReviewAndSubmitViewModel {
 // MARK: Core data implementation
 extension ReviewAndSubmitViewModel {
     
-    func saveData(withModel: LoanApplicationCDModel) throws {
+    func saveData(person: PersonCDModel, loan: LoanApplicationCDModel) throws {
+        person.addToLoans(loan)
         try context.save()
     }
 }
