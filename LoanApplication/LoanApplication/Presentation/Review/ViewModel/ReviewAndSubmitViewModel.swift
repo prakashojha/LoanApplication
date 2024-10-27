@@ -6,12 +6,18 @@
 //
 
 import Foundation
+import UIKit
+import CoreData
 
 class ReviewAndSubmitViewModel {
+    
+    var showAlert: ((String) -> Void)?
     
     var loanApplicationModel: LoanApplicationModel
     var coordinator: AppCoordinator?
     var model: [ReviewAndSubmitModel] = []
+    
+    let context =  (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     init(loanApplicationModel: LoanApplicationModel, coordinator: AppCoordinator? = nil) {
         self.loanApplicationModel = loanApplicationModel
@@ -32,5 +38,39 @@ class ReviewAndSubmitViewModel {
     
     var numberOfRowsInSection: Int {
         return model.count
+    }
+    
+    private func createModelForCoreData() -> LoanApplicationCDModel {
+        let model = LoanApplicationCDModel(context: context)
+        model.fullName = loanApplicationModel.personalInfo.fullName
+        model.email = loanApplicationModel.personalInfo.email
+        model.phoneNumber = loanApplicationModel.personalInfo.phoneNumber
+        model.gender = loanApplicationModel.personalInfo.gender
+        model.address = loanApplicationModel.personalInfo.address
+        model.annualIncome = loanApplicationModel.financialInfo.annualIncome
+        model.desiredLoanAmount = loanApplicationModel.financialInfo.desiredLoanAmount
+        model.irdNumber = loanApplicationModel.financialInfo.irdNumber
+        model.dateSubmitted = Date()
+        
+        return model
+    }
+    
+    func onSubmitPressed() {
+        let coreDataModel = createModelForCoreData()
+        do {
+            try saveData(withModel: coreDataModel)
+            
+        }
+        catch(let error) {
+            showAlert?(error.localizedDescription)
+        }
+    }
+}
+
+// MARK: Core data implementation
+extension ReviewAndSubmitViewModel {
+    
+    func saveData(withModel: LoanApplicationCDModel) throws {
+        try context.save()
     }
 }
