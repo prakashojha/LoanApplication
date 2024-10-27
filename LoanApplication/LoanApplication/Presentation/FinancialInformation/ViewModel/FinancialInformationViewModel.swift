@@ -66,7 +66,7 @@ class FinancialInformationViewModel {
         return formattedText
     }
     
-    func checkAnnualIncomeIsValid(annualIncome: String?) -> String? {
+    func checkAnnualIncomeIsValid(_ annualIncome: String?) -> String? {
         guard let trimmedIncome = Helper.isValidString(annualIncome) else {
             alertMessage?("Annual Income cannot be empty"){}
             return nil
@@ -80,7 +80,7 @@ class FinancialInformationViewModel {
         return trimmedIncome
     }
     
-    func checkDesiredLoanAmountIsValid(desiredLoanAmount: String?, annualIncome: String) -> String? {
+    func checkDesiredLoanAmountIsValid(_ desiredLoanAmount: String?, _ annualIncome: String) -> String? {
         guard let trimmedDesiredLoanAmount = Helper.isValidString(desiredLoanAmount) else {
             alertMessage?("Loan Amount cannot be empty"){}
             return nil
@@ -109,9 +109,24 @@ class FinancialInformationViewModel {
         return trimmedDesiredLoanAmount
     }
     
+    func verifyItemsValidity(_ annualIncome: String?, _ desiredLoanAmount: String?) -> (String, String)? {
+        guard let validAnnualIncome = checkAnnualIncomeIsValid(annualIncome) else { return nil }
+        guard let validLoanAmount = checkDesiredLoanAmountIsValid(desiredLoanAmount, validAnnualIncome) else { return nil }
+        
+        return (validAnnualIncome, validLoanAmount)
+    }
+    
+    func updateModel(_ annualIncome: String, _ desiredLoanAmount: String, _ irdNumber: String ) {
+        self.model.annualIncome = annualIncome
+        self.model.desiredLoanAmount = desiredLoanAmount
+        self.model.irdNumber = irdNumber
+    }
+    
+    //TODO: check ird number validity
     func onNextButtonPressed(_ annualIncome: String?, _ desiredLoanAmount: String?, irdNumber: String?) {
-        guard let annualIncome = checkAnnualIncomeIsValid(annualIncome: annualIncome) else { return }
-        guard let desiredLoanAmount = checkDesiredLoanAmountIsValid(desiredLoanAmount: desiredLoanAmount, annualIncome: annualIncome) else { return }
+        guard let validItems = verifyItemsValidity(annualIncome, desiredLoanAmount) else { return }
+        updateModel(validItems.0, validItems.1, irdNumber ?? "000-000-000")
+        coordinator?.loadNextScreen(fromScreen: .FinancialInformationScreen(model: model))
     }
     
     func onPreviousButtonPressed() {
