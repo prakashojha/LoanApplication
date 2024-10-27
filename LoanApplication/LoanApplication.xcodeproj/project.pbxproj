@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B61CE6FC2CCDA72B0088FEF4 /* ReviewAndSubmitViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61CE6FB2CCDA72A0088FEF4 /* ReviewAndSubmitViewCell.swift */; };
+		B61CE6FE2CCDAA280088FEF4 /* ReviewAndSubmitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61CE6FD2CCDAA280088FEF4 /* ReviewAndSubmitModel.swift */; };
 		B6217E372CCAC7730080E858 /* PersonalInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6217E362CCAC7730080E858 /* PersonalInformationViewModel.swift */; };
 		B6217E392CCAD6B80080E858 /* PersonalInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6217E382CCAD6B80080E858 /* PersonalInformationModel.swift */; };
 		B6217E3F2CCB1D1A0080E858 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6217E3E2CCB1D1A0080E858 /* AppCoordinator.swift */; };
@@ -21,6 +23,7 @@
 		B66068C12CCC6E2300D08D20 /* LoanApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66068C02CCC6E2300D08D20 /* LoanApplicationModel.swift */; };
 		B66068C42CCC893400D08D20 /* LoanApplicationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66068C32CCC893400D08D20 /* LoanApplicationViewModel.swift */; };
 		B66068CA2CCD106B00D08D20 /* ReviewAndSubmitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66068C92CCD106B00D08D20 /* ReviewAndSubmitViewController.swift */; };
+		B66068CD2CCD16CA00D08D20 /* ReviewAndSubmitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66068CC2CCD16CA00D08D20 /* ReviewAndSubmitViewModel.swift */; };
 		B6B282AF2CC9CF4C008F492A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B282AE2CC9CF4C008F492A /* AppDelegate.swift */; };
 		B6B282B12CC9CF4C008F492A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B282B02CC9CF4C008F492A /* SceneDelegate.swift */; };
 		B6B282B32CC9CF4C008F492A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B282B22CC9CF4C008F492A /* ViewController.swift */; };
@@ -53,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B61CE6FB2CCDA72A0088FEF4 /* ReviewAndSubmitViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAndSubmitViewCell.swift; sourceTree = "<group>"; };
+		B61CE6FD2CCDAA280088FEF4 /* ReviewAndSubmitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAndSubmitModel.swift; sourceTree = "<group>"; };
 		B6217E362CCAC7730080E858 /* PersonalInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationViewModel.swift; sourceTree = "<group>"; };
 		B6217E382CCAD6B80080E858 /* PersonalInformationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationModel.swift; sourceTree = "<group>"; };
 		B6217E3E2CCB1D1A0080E858 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -67,6 +72,7 @@
 		B66068C02CCC6E2300D08D20 /* LoanApplicationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanApplicationModel.swift; sourceTree = "<group>"; };
 		B66068C32CCC893400D08D20 /* LoanApplicationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanApplicationViewModel.swift; sourceTree = "<group>"; };
 		B66068C92CCD106B00D08D20 /* ReviewAndSubmitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAndSubmitViewController.swift; sourceTree = "<group>"; };
+		B66068CC2CCD16CA00D08D20 /* ReviewAndSubmitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAndSubmitViewModel.swift; sourceTree = "<group>"; };
 		B6B282AB2CC9CF4C008F492A /* LoanApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoanApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6B282AE2CC9CF4C008F492A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6B282B02CC9CF4C008F492A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +116,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B61CE6FF2CCDAA2D0088FEF4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B61CE6FD2CCDAA280088FEF4 /* ReviewAndSubmitModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B6217E352CCAC7540080E858 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +238,8 @@
 		B66068C72CCD103000D08D20 /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				B61CE6FF2CCDAA2D0088FEF4 /* Model */,
+				B66068CB2CCD16AD00D08D20 /* ViewModel */,
 				B66068C82CCD104200D08D20 /* View */,
 			);
 			path = Review;
@@ -233,8 +249,17 @@
 			isa = PBXGroup;
 			children = (
 				B66068C92CCD106B00D08D20 /* ReviewAndSubmitViewController.swift */,
+				B61CE6FB2CCDA72A0088FEF4 /* ReviewAndSubmitViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B66068CB2CCD16AD00D08D20 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B66068CC2CCD16CA00D08D20 /* ReviewAndSubmitViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		B6B282A22CC9CF4C008F492A = {
@@ -464,7 +489,10 @@
 				B6B282E72CC9DDB3008F492A /* LAUITextField.swift in Sources */,
 				B6B282B32CC9CF4C008F492A /* ViewController.swift in Sources */,
 				B6B282E32CC9D251008F492A /* PersonalInformationView.swift in Sources */,
+				B61CE6FC2CCDA72B0088FEF4 /* ReviewAndSubmitViewCell.swift in Sources */,
+				B66068CD2CCD16CA00D08D20 /* ReviewAndSubmitViewModel.swift in Sources */,
 				B6B282AF2CC9CF4C008F492A /* AppDelegate.swift in Sources */,
+				B61CE6FE2CCDAA280088FEF4 /* ReviewAndSubmitModel.swift in Sources */,
 				B6217E492CCB30290080E858 /* FinancialInformationViewModel.swift in Sources */,
 				B6217E4F2CCB7C290080E858 /* FinancialInformationModel.swift in Sources */,
 				B66068C42CCC893400D08D20 /* LoanApplicationViewModel.swift in Sources */,
