@@ -120,7 +120,7 @@ extension FinancialInformationView: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // Get the updated text after the replacement
-        var updatedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+        let updatedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
         guard viewModel.containValidAmount(updatedText: updatedText, replacementString: string) else { return false }
         
         // Directly update the text field to allow typing of decimal part
