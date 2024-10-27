@@ -42,7 +42,6 @@ class LoanApplicationViewController: UIViewController, ShowAlertProtocol {
     
     // UI setup
     private func setupUI() {
-        self.view.backgroundColor = .white
         view.addSubview(segmentedControl)
         view.addSubview(containerView)
     }
