@@ -95,7 +95,7 @@ class ReviewAndSubmitViewController: UIViewController {
     }
     
     @objc func onSubmitButtonPressed() {
-        
+        viewModel.onSubmitPressed()
     }
 }
 
