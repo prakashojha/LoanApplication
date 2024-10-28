@@ -38,7 +38,9 @@ class LoanApplicationViewController: UIViewController, ShowAlertProtocol, HideKe
         setupUI()
         setupConstraints()
         hideKeyboardWhenTappedAround()
+        self.navigationItem.title = "Loan Application"
         self.view.backgroundColor = UIColor.init(red: 199/255, green: 255/255, blue: 246/255, alpha: 1.0)
+        
     }
     
     // UI setup

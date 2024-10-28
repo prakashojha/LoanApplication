@@ -92,7 +92,6 @@ class AppCoordinator: Coordinator {
     }
     
     func showLoanApplicationScreen(forModel cdModel: LoanApplicationCDModel) {
-        print(cdModel)
         let model: LoanApplicationModel = LoanApplicationModel(
             personalInfo: .init(
                 fullName: cdModel.fullName ?? "NA",

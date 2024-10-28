@@ -36,6 +36,9 @@ class HomeScreenViewController: UIViewController, ShowAlertProtocol {
         self.view.backgroundColor = UIColor.init(red: 199/255, green: 255/255, blue: 246/255, alpha: 1.0)
         setupUI()
         fetchData()
+        self.navigationItem.title = "Loan Details"
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "back", style: .done, target: nil, action: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
