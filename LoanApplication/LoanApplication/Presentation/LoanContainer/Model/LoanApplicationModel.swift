@@ -10,13 +10,19 @@ import Foundation
 struct LoanApplicationModel {
     var personalInfo: PersonalInformationModel
     var financialInfo: FinancialInformationModel
+    var isComplete: Bool
+    var id: UUID
     
     init(
         personalInfo: PersonalInformationModel = PersonalInformationModel(),
-        financialInfo: FinancialInformationModel = FinancialInformationModel()
+        financialInfo: FinancialInformationModel = FinancialInformationModel(),
+        isComplete: Bool = false,
+        id: UUID
     ) {
         self.personalInfo = personalInfo
         self.financialInfo = financialInfo
+        self.isComplete = isComplete
+        self.id = id
     }
     struct PersonalInformationModel {
         var fullName: String
@@ -26,11 +32,11 @@ struct LoanApplicationModel {
         var address: String
         
         init(
-            fullName: String = "John Doe",
-            email: String = "jonhdoe@gmail.com",
-            phoneNumber: String = "+64229875477",
+            fullName: String = "",
+            email: String = "",
+            phoneNumber: String = "",
             gender: String = "Male",
-            address: String = "1 Alliance lane"
+            address: String = ""
         ) {
             self.fullName = fullName
             self.email = email
@@ -46,9 +52,9 @@ struct LoanApplicationModel {
         var irdNumber: String
         
         init(
-            annualIncome: String = "$100,000",
-            desiredLoanAmount: String = "$50,000",
-            irdNumber: String = "123-456-789"
+            annualIncome: String = "",
+            desiredLoanAmount: String = "",
+            irdNumber: String = ""
         ) {
             self.annualIncome = annualIncome
             self.desiredLoanAmount = desiredLoanAmount

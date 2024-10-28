@@ -23,7 +23,7 @@ class PersonalInformationViewController: UIViewController, HideKeyboardProtocol,
     
     private lazy var personalInformationView: PersonalInformationView = {
         viewModel.alertMessage = { (message, completion) in
-            self.showAlert(with: message, completion: completion)
+            self.showAlert(message: message, completion: completion)
         }
         return PersonalInformationView(viewModel: viewModel)
     }()

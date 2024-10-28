@@ -13,7 +13,7 @@ import UIKit
 }
 
 protocol ShowAlertProtocol {
-    func showAlert(with message: String, completion: (()->Void)?)
+    func showAlert(title: String, message: String, completion: (()->Void)?)
 }
 
 extension HideKeyboardProtocol where Self: UIViewController {
@@ -27,8 +27,8 @@ extension HideKeyboardProtocol where Self: UIViewController {
 
 extension ShowAlertProtocol where Self: UIViewController {
     
-    func showAlert(with message: String, completion: (()->Void)?) {
-        let alertController = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+    func showAlert(title: String = "Alert", message: String, completion: (()->Void)?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel) { _ in
             completion?()
         }

@@ -7,17 +7,17 @@
 
 import Foundation
 import UIKit
-import CoreData
 
 class HomeScreenViewModel {
     
-    let context: NSManagedObjectContext
+   // let dataService: AnyDataService<LoanApplicationCDModel>
     let coordinator: AppCoordinator?
     
     private var homeScreenModels: [HomeScreenModel] = []
+    private var loanApplicationDataCD: [LoanApplicationCDModel] = []
     
-    init(context: NSManagedObjectContext, coordinator: AppCoordinator?) {
-        self.context = context
+    init(coordinator: AppCoordinator?) {
+        //self.dataService = dataService
         self.coordinator = coordinator
     }
     
@@ -29,37 +29,55 @@ class HomeScreenViewModel {
         return homeScreenModels[index]
     }
     
-    // get data from core model
-    func fetchData() {
-        do {
-            let loans = try fetchFromCoreData(context: context)
-            createModelForCell(loans: loans)
-        } catch {
-            print("Failed to fetch data: \(error)")
+    func onLoanFileSelected(index: Int) {
+        if !homeScreenModels[index].isComplete {
+            coordinator?.showLoanApplicationScreen(forModel: loanApplicationDataCD[index])
         }
     }
     
-    private func createModelForCell(loans: [LoanApplicationCDModel]?) {
-        guard let loans = loans else { return }
-        
-        for loan in loans {
-            let model = HomeScreenModel(fullName: loan.fullName ?? "NA" ,
-                                        loanAmount: loan.desiredLoanAmount ?? "NA",
-                                        dateSubmitted: Helper.formatDate(loan.dateSubmitted) ?? "NA")
-            homeScreenModels.append(model)
+    // get data from core model
+    func fetchData(completion: @escaping (Result<Bool, Error>) -> Void) {
+        self.loanApplicationDataCD = []
+        coordinator?.fetchFromCoreData{ [weak self ] result in
+            switch(result) {
+            case .success(let data):
+                self?.loanApplicationDataCD = data
+                self?.createDataForView(loanData: data)
+                completion(.success(true))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
-}
-
-// core data related implementations
-
-extension HomeScreenViewModel {
-    func fetchFromCoreData(context: NSManagedObjectContext) throws -> [LoanApplicationCDModel]? {
-        let fetchRequest: NSFetchRequest<PersonCDModel> = PersonCDModel.fetchRequest()
-        let people = try context.fetch(fetchRequest)
-        guard let person = people.first else { return nil }
-        guard let loans = person.loans?.allObjects as? [LoanApplicationCDModel] else { return nil }
-        
-        return loans
+    
+    func createDataForView(loanData: [LoanApplicationCDModel]) {
+        homeScreenModels = []
+        for loan in loanData {
+            let homeScreenModel = HomeScreenModel(
+                fullName: loan.fullName ?? "NA" ,
+                loanAmount: loan.desiredLoanAmount ?? "NA",
+                dateSubmitted: Helper.formatDate(loan.dateSubmitted) ?? "NA",
+                isComplete: loan.isComplete
+            )
+            homeScreenModels.append(homeScreenModel)
+        }
+    }
+    
+    func deleteItem(at index: Int, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let item = loanApplicationDataCD[index]
+        coordinator?.deleteFromCoreData(item: item){ [weak self ] result in
+            switch(result) {
+            case .success(let status):
+                self?.homeScreenModels.remove(at: index)
+                self?.loanApplicationDataCD.remove(at: index)
+                completion(.success(status))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func applyNewLoan() {
+        coordinator?.loadNextScreen(fromScreen: .HomeScreen)
     }
 }

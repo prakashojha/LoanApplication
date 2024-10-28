@@ -7,7 +7,8 @@
 
 import UIKit
 
-class ReviewAndSubmitViewController: UIViewController {
+class ReviewAndSubmitViewController: UIViewController, ShowAlertProtocol {
+    
 
     let viewModel: ReviewAndSubmitViewModel
     
@@ -91,7 +92,7 @@ class ReviewAndSubmitViewController: UIViewController {
     
     
     @objc func onEditButtonPressed() {
-        
+        viewModel.onEditButtonPressed()
     }
     
     @objc func onSubmitButtonPressed() {

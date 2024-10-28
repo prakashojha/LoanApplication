@@ -31,9 +31,9 @@ class LAUIButton: UIButton {
 
 extension UIButton.Configuration {
     
-    static func navigationCustomButton(title: String) -> UIButton.Configuration {
+    static func navigationCustomButton(title: String, fontSize: CGFloat = 14) -> UIButton.Configuration {
         var container = AttributeContainer()
-        container.font = UIFont.boldSystemFont(ofSize: 18)
+        container.font = UIFont.boldSystemFont(ofSize: fontSize)
         
         var config = UIButton.Configuration.filled()
         config.titleAlignment = .center
@@ -47,6 +47,20 @@ extension UIButton.Configuration {
         return config
     }
     
+    static var newLoanCustomButton: UIButton.Configuration {
+        var container = AttributeContainer()
+        container.font = UIFont.boldSystemFont(ofSize: 18)
+        
+        var config = UIButton.Configuration.filled()
+        config.titleAlignment = .center
+        config.baseBackgroundColor = .systemBlue
+        config.baseForegroundColor = .white
+        config.cornerStyle = .capsule
+        config.attributedTitle = AttributedString("New Loan", attributes: container)
+        
+        return config
+    }
+    
     static var personalInformationCustomButton: UIButton.Configuration {
         var container = AttributeContainer()
         container.font = UIFont.boldSystemFont(ofSize: 18)
@@ -55,8 +69,6 @@ extension UIButton.Configuration {
         config.titleAlignment = .center
         config.baseBackgroundColor = .systemBlue
         config.baseForegroundColor = .white
-        //config.background.strokeColor = .lightGray
-        //config.background.strokeWidth = 2.0
         config.cornerStyle = .medium
         config.attributedTitle = AttributedString("Next", attributes: container)
         

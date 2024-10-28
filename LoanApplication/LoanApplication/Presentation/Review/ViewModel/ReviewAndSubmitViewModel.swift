@@ -17,7 +17,7 @@ class ReviewAndSubmitViewModel {
     var coordinator: AppCoordinator?
     var model: [ReviewAndSubmitModel] = []
     
-    let context =  (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    //let context =  (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     init(loanApplicationModel: LoanApplicationModel, coordinator: AppCoordinator? = nil) {
         self.loanApplicationModel = loanApplicationModel
@@ -39,43 +39,21 @@ class ReviewAndSubmitViewModel {
     var numberOfRowsInSection: Int {
         return model.count
     }
-    
-    private func createModelForCoreData() -> LoanApplicationCDModel {
-        
-        let model = LoanApplicationCDModel(context: context)
-        
-        model.fullName = loanApplicationModel.personalInfo.fullName
-        model.email = loanApplicationModel.personalInfo.email
-        model.phoneNumber = loanApplicationModel.personalInfo.phoneNumber
-        model.gender = loanApplicationModel.personalInfo.gender
-        model.address = loanApplicationModel.personalInfo.address
-        model.annualIncome = loanApplicationModel.financialInfo.annualIncome
-        model.desiredLoanAmount = loanApplicationModel.financialInfo.desiredLoanAmount
-        model.irdNumber = loanApplicationModel.financialInfo.irdNumber
-        model.dateSubmitted = Date()
-        
-        return model
-    }
+
     
     func onSubmitPressed() {
-        let person = PersonCDModel(context: context)
-        let loan = createModelForCoreData()
-        
-        do {
-            try saveData(person: person, loan: loan)
-            print("Saved Successfully")
-        }
-        catch(let error) {
-            showAlert?(error.localizedDescription)
-        }
+        coordinator?.onSubmitButtonPressed(model: loanApplicationModel)
+//        coordinator?.saveToCoreData(model: loanApplicationModel, completion: { [weak self] result in
+//            switch(result) {
+//            case .success(_):
+//                self?.coordinator?.showSuccessScreen()
+//            case .failure(let error ):
+//                self?.showAlert?(error.localizedDescription)
+//            }
+//        })
     }
-}
-
-// MARK: Core data implementation
-extension ReviewAndSubmitViewModel {
     
-    func saveData(person: PersonCDModel, loan: LoanApplicationCDModel) throws {
-        person.addToLoans(loan)
-        try context.save()
+    func onEditButtonPressed(){
+        coordinator?.onEditButtonPressed()
     }
 }

@@ -15,6 +15,7 @@ class HomeScreenTableViewCell: UITableViewCell {
                 self?.nameView.value = self?.cellViewModel?.fullName
                 self?.loanAmountView.value = self?.cellViewModel?.loanAmount
                 self?.dateSubmittedView.value = self?.cellViewModel?.dateSubmitted
+                self?.statusView.value = self?.cellViewModel?.isComplete ?? false ? "Complete" : "InProgress"
             }
         }
     }
@@ -31,6 +32,11 @@ class HomeScreenTableViewCell: UITableViewCell {
     
     private lazy var dateSubmittedView: LAUILabelView = {
         let view = LAUILabelView(title: "Date Submitted", value: "NA")
+        return view
+    }()
+    
+    private lazy var statusView: LAUILabelView = {
+        let view = LAUILabelView(title: "Status", value: "NA")
         return view
     }()
     
@@ -56,6 +62,7 @@ class HomeScreenTableViewCell: UITableViewCell {
         containerView.addSubview(nameView)
         containerView.addSubview(loanAmountView)
         containerView.addSubview(dateSubmittedView)
+        containerView.addSubview(statusView)
         
         containerView.backgroundColor = .white // Set background color for visibility
         containerView.layer.cornerRadius = 8   // Optional rounded corners
@@ -70,29 +77,38 @@ class HomeScreenTableViewCell: UITableViewCell {
         loanAmountView.translatesAutoresizingMaskIntoConstraints = false
         dateSubmittedView.translatesAutoresizingMaskIntoConstraints = false
         containerView.translatesAutoresizingMaskIntoConstraints = false
+        statusView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             
-            nameView.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 8),
+            statusView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
+            statusView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
+            statusView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
+            //statusView.heightAnchor.constraint(equalToConstant: 25),
+            
+            nameView.topAnchor.constraint(equalTo: statusView.bottomAnchor, constant: 0),
+            nameView.bottomAnchor.constraint(equalTo: loanAmountView.topAnchor, constant: 0),
             nameView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 8),
             nameView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -8),
-            //nameView.heightAnchor.constraint(equalToConstant: 15),
-            
-            dateSubmittedView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -16),
-            dateSubmittedView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 8),
-            dateSubmittedView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -8),
-            // dateSubmittedView.heightAnchor.constraint(equalToConstant: 15),
+            //nameView.heightAnchor.constraint(lessThanOrEqualToConstant: 25),
             
             loanAmountView.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 0),
             loanAmountView.bottomAnchor.constraint(equalTo: dateSubmittedView.topAnchor, constant: 0),
             loanAmountView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 8),
             loanAmountView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -8),
-            // loanAmountView.heightAnchor.constraint(equalToConstant: 15)
+           // loanAmountView.heightAnchor.constraint(equalToConstant: 25),
+            
+            dateSubmittedView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -16),
+            dateSubmittedView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 8),
+            dateSubmittedView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -8),
+            //dateSubmittedView.heightAnchor.constraint(equalToConstant: 25),
+            
+            
             
         ])
     }

@@ -13,14 +13,14 @@ class FinancialInformationView: UIView {
     private let viewModel: FinancialInformationViewModel
     
     private lazy var annualIncome: LAUIInputField = {
-        let view: LAUIInputField = LAUIInputField(viewModel.annualIncome, labelText: "Annual Income")
+        let view: LAUIInputField = LAUIInputField("$100,000", viewModel.annualIncome, labelText: "Annual Income")
         view.textField.tag = 1
         view.textField.delegate = self
         return view
     }()
     
     private lazy var desiredLoanAmount: LAUIInputField = {
-        let view: LAUIInputField = LAUIInputField(viewModel.desiredLoanAmount, labelText: "Loan Amount (50% of annual income)")
+        let view: LAUIInputField = LAUIInputField("$50,000", viewModel.desiredLoanAmount, labelText: "Loan Amount (50% of annual income)")
         view.textField.autocapitalizationType = .none
         view.textField.tag = 2
         view.textField.delegate = self
@@ -28,7 +28,7 @@ class FinancialInformationView: UIView {
     }()
     
     private lazy var irdNumber: LAUIInputField = {
-        let view: LAUIInputField = LAUIInputField(viewModel.irdNumber, labelText: "IRD Number")
+        let view: LAUIInputField = LAUIInputField("123-456-789", viewModel.irdNumber, labelText: "IRD Number")
         view.textField.autocapitalizationType = .none
         view.textField.tag = 3
         view.textField.delegate = self
@@ -36,13 +36,19 @@ class FinancialInformationView: UIView {
     }()
     
     private lazy var previousButton: LAUIButton = {
-        let button = LAUIButton(configuration: .navigationCustomButton(title: "Previous"))
+        let button = LAUIButton(configuration: .navigationCustomButton(title: "Previous", fontSize: 14))
         button.addTarget(self, action: #selector(onPreviousButtonPressed), for: .touchUpInside)
         return button
     }()
     
+    private lazy var saveAndExit: LAUIButton = {
+        let button: LAUIButton = LAUIButton(configuration: .navigationCustomButton(title: "Save and Exit", fontSize: 14))
+        button.addTarget(self, action: #selector(onSaveAndExitPressed), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var nextButton: LAUIButton = {
-        let button = LAUIButton(configuration: .navigationCustomButton(title: "Next"))
+        let button = LAUIButton(configuration: .navigationCustomButton(title: "Next", fontSize: 14))
         button.addTarget(self, action: #selector(onNextButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -50,6 +56,7 @@ class FinancialInformationView: UIView {
     private lazy var navigationButtonView: UIStackView = {
         let view: UIStackView = UIStackView()
         view.addArrangedSubview(previousButton)
+        view.addArrangedSubview(saveAndExit)
         view.addArrangedSubview(nextButton)
         view.spacing = 10
         return view
@@ -71,12 +78,20 @@ class FinancialInformationView: UIView {
         viewModel.onNextButtonPressed(
             annualIncome.textField.text,
             desiredLoanAmount.textField.text,
-            irdNumber: irdNumber.textField.text
+            irdNumber.textField.text
         )
     }
     
     @objc func onPreviousButtonPressed() {
         viewModel.onPreviousButtonPressed()
+    }
+    
+    @objc func onSaveAndExitPressed() {
+        viewModel.onSaveAndExitPressed(
+            annualIncome.textField.text,
+            desiredLoanAmount.textField.text,
+            irdNumber.textField.text
+        )
     }
     
     func setupView() {
@@ -109,8 +124,8 @@ class FinancialInformationView: UIView {
             irdNumber.heightAnchor.constraint(equalToConstant: viewModel.viewHeight),
             
             navigationButtonView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30),
-            navigationButtonView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 32),
-            navigationButtonView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -32),
+            navigationButtonView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 28),
+            navigationButtonView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -28),
             navigationButtonView.heightAnchor.constraint(equalToConstant: 44)
         ])
     }

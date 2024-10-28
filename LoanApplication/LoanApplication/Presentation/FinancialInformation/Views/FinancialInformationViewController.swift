@@ -13,7 +13,7 @@ class FinancialInformationViewController: UIViewController, HideKeyboardProtocol
 
     private lazy var financialInformationView: FinancialInformationView = {
         viewModel.alertMessage = { (message, completion) in
-            self.showAlert(with: message, completion: completion)
+            self.showAlert(message: message, completion: completion)
         }
         return FinancialInformationView(viewModel: viewModel)
     }()

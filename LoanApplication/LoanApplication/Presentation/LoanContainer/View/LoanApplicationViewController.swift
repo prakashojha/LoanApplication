@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoanApplicationViewController: UIViewController, ShowAlertProtocol {
+class LoanApplicationViewController: UIViewController, ShowAlertProtocol, HideKeyboardProtocol {    
     
     let viewModel: LoanApplicationViewModel
     
@@ -37,6 +37,7 @@ class LoanApplicationViewController: UIViewController, ShowAlertProtocol {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        hideKeyboardWhenTappedAround()
         self.view.backgroundColor = .cyan
     }
     
@@ -64,6 +65,10 @@ class LoanApplicationViewController: UIViewController, ShowAlertProtocol {
             containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    @objc func dismissKeyboardView() {
+        view.endEditing(true)
     }
     
     // Transition to a new child view controller with animation
@@ -116,5 +121,6 @@ class LoanApplicationViewController: UIViewController, ShowAlertProtocol {
             currentViewController = viewController
         }
     }
+    
 }
 

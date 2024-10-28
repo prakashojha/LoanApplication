@@ -116,4 +116,25 @@ final class PersonalInformationViewModel {
         self.coordinator?.loadNextScreen(fromScreen: .PersonalInformationScreen(model: model))
     }
     
+    func onSaveAndExitPressed(_ fullName: String?, _ email: String?, _ phoneNumber: String?, _ gender: String?, _ address: String?) {
+        var validName: String = ""
+        var validEmail: String = ""
+        var validPhone: String = ""
+        
+        if let fullName = fullName, !fullName.isEmpty, let validFullName = checkFirstNameIsValid(firstName: fullName) {
+            validName = validFullName
+        }
+        if let email = email, !email.isEmpty, let verifiedEmail = checkEmailIsValid(email: email) {
+            validEmail = verifiedEmail
+        }
+        
+        if let phoneNumber = phoneNumber, !phoneNumber.isEmpty, let validPhoneNumber = checkPhoneNumberIsValid(phoneNumber: phoneNumber) {
+            validPhone = validPhoneNumber
+        }
+        
+        updateModel(validName, validEmail, validPhone, gender!, address ?? "Not provided")
+        coordinator?.saveAndExit(fromScreen: .PersonalInformationScreen(model: model))
+        
+    }
+    
 }

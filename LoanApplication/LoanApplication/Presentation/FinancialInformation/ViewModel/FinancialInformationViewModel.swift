@@ -123,7 +123,7 @@ class FinancialInformationViewModel {
     }
     
     //TODO: check ird number validity
-    func onNextButtonPressed(_ annualIncome: String?, _ desiredLoanAmount: String?, irdNumber: String?) {
+    func onNextButtonPressed(_ annualIncome: String?, _ desiredLoanAmount: String?, _ irdNumber: String?) {
         guard let validItems = verifyItemsValidity(annualIncome, desiredLoanAmount) else { return }
         updateModel(validItems.0, validItems.1, irdNumber ?? "000-000-000")
         coordinator?.loadNextScreen(fromScreen: .FinancialInformationScreen(model: model))
@@ -131,5 +131,26 @@ class FinancialInformationViewModel {
     
     func onPreviousButtonPressed() {
         coordinator?.loadPreviousScreen(fromScreen: .FinancialInformationScreen(model: model))
+    }
+    
+    func onSaveAndExitPressed(_ annualIncome: String?, _ desiredLoanAmount: String?, _ irdNumber: String?){
+        
+        var income: String = ""
+        var loan: String = ""
+        
+        if let desiredLoanAmount = desiredLoanAmount, !desiredLoanAmount.isEmpty {
+            guard let annualIncome = checkAnnualIncomeIsValid(annualIncome) else { return }
+            guard let validLoan = checkDesiredLoanAmountIsValid(desiredLoanAmount, annualIncome) else { return }
+            income = annualIncome
+            loan = validLoan
+        }
+        else if let annualIncome = annualIncome, !annualIncome.isEmpty {
+            guard let validAnnualIncome = checkAnnualIncomeIsValid(annualIncome) else { return }
+            income = validAnnualIncome
+        }
+        
+        self.updateModel(income, loan, irdNumber ?? "")
+        coordinator?.saveAndExit(fromScreen: .FinancialInformationScreen(model: model))
+        
     }
 }

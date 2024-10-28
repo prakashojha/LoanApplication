@@ -45,9 +45,9 @@ class PersonalInformationView: UIView {
     
     private lazy var genderView: LAUIInputField = {
         let view: LAUIInputField = LAUIInputField(viewModel.gender, labelText: "Select Gender")
-        view.textField.text = viewModel.genders[0]
+        view.textField.text = viewModel.gender
         view.textField.inputView = pickerView
-        view.textField.delegate = self
+        //view.textField.delegate = self
         return view
     }()
     
@@ -56,10 +56,26 @@ class PersonalInformationView: UIView {
         return view
     }()
     
-    private lazy var button: LAUIButton = {
-        let button = LAUIButton(configuration: .personalInformationCustomButton)
+    private lazy var saveAndExit: LAUIButton = {
+        let button: LAUIButton = LAUIButton(configuration: .navigationCustomButton(title: "Save and Exit"))
+        button.isEnabled = false
+        button.addTarget(self, action: #selector(onSaveAndExitPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var nextButton: LAUIButton = {
+        let button = LAUIButton(configuration: .navigationCustomButton(title: "Next"))
+        button.isEnabled = false
         button.addTarget(self, action: #selector(onNextButtonPressed), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var navigationButtonView: UIStackView = {
+        let view: UIStackView = UIStackView()
+        view.addArrangedSubview(saveAndExit)
+        view.addArrangedSubview(nextButton)
+        view.spacing = 10
+        return view
     }()
     
     init(viewModel: PersonalInformationViewModel) {
@@ -68,6 +84,7 @@ class PersonalInformationView: UIView {
         
         setupView()
         setupConstraints()
+        updateButtonState()
     }
     
     required init?(coder: NSCoder) {
@@ -84,13 +101,23 @@ class PersonalInformationView: UIView {
         )
     }
     
+    @objc func onSaveAndExitPressed() {
+        viewModel.onSaveAndExitPressed(
+            firstNameView.textField.text,
+            emailAddressView.textField.text,
+            phoneNumberView.textField.text,
+            genderView.textField.text,
+            addressView.textField.text
+            )
+    }
+    
     func setupView() {
         self.addSubview(firstNameView)
         self.addSubview(emailAddressView)
         self.addSubview(phoneNumberView)
         self.addSubview(genderView)
         self.addSubview(addressView)
-        self.addSubview(button)
+        self.addSubview(navigationButtonView)
     }
     
     func setupConstraints() {
@@ -99,7 +126,7 @@ class PersonalInformationView: UIView {
         phoneNumberView.translatesAutoresizingMaskIntoConstraints = false
         genderView.translatesAutoresizingMaskIntoConstraints = false
         addressView.translatesAutoresizingMaskIntoConstraints = false
-        button.translatesAutoresizingMaskIntoConstraints = false
+        navigationButtonView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             firstNameView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -127,11 +154,11 @@ class PersonalInformationView: UIView {
             addressView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -viewModel.gapRight),
             addressView.heightAnchor.constraint(equalToConstant: viewModel.viewHeight),
             
-            button.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30),
-            button.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 32),
-            button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -32),
-            button.heightAnchor.constraint(equalToConstant: 44),
-            button.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            navigationButtonView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30),
+            navigationButtonView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 32),
+            navigationButtonView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -32),
+            navigationButtonView.heightAnchor.constraint(equalToConstant: 44),
+            navigationButtonView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         
         ])
     }
@@ -142,6 +169,25 @@ extension PersonalInformationView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        updateButtonState()
+    }
+    
+    private func updateButtonState() {
+        let isAnyFieldNotEmpty = !(firstNameView.textField.text?.isEmpty ?? true) ||
+                                !(emailAddressView.textField.text?.isEmpty ?? true) ||
+                                !(phoneNumberView.textField.text?.isEmpty ?? true)
+        
+        saveAndExit.isEnabled = isAnyFieldNotEmpty
+        
+        let isAllFieldFilled = !(firstNameView.textField.text?.isEmpty ?? false) &&
+                               !(emailAddressView.textField.text?.isEmpty ?? false) &&
+                               !(phoneNumberView.textField.text?.isEmpty ?? false)
+        
+        nextButton.isEnabled = isAllFieldFilled
+        
     }
 }
 
