@@ -22,6 +22,7 @@
 		B61CE7602CCDFC920088FEF4 /* HomeScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61CE75F2CCDFC920088FEF4 /* HomeScreenTableViewCell.swift */; };
 		B61CE76A2CCE0BF30088FEF4 /* LAUILabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61CE7692CCE0BF30088FEF4 /* LAUILabelView.swift */; };
 		B61CE76D2CCE0F2B0088FEF4 /* HomeScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61CE76C2CCE0F2B0088FEF4 /* HomeScreenModel.swift */; };
+		B61DE9AE2CD04D8700C7142E /* PlaceHolderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61DE9AD2CD04D8700C7142E /* PlaceHolderCardView.swift */; };
 		B6217E372CCAC7730080E858 /* PersonalInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6217E362CCAC7730080E858 /* PersonalInformationViewModel.swift */; };
 		B6217E392CCAD6B80080E858 /* PersonalInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6217E382CCAD6B80080E858 /* PersonalInformationModel.swift */; };
 		B6217E3F2CCB1D1A0080E858 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6217E3E2CCB1D1A0080E858 /* AppCoordinator.swift */; };
@@ -83,6 +84,7 @@
 		B61CE75F2CCDFC920088FEF4 /* HomeScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenTableViewCell.swift; sourceTree = "<group>"; };
 		B61CE7692CCE0BF30088FEF4 /* LAUILabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAUILabelView.swift; sourceTree = "<group>"; };
 		B61CE76C2CCE0F2B0088FEF4 /* HomeScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenModel.swift; sourceTree = "<group>"; };
+		B61DE9AD2CD04D8700C7142E /* PlaceHolderCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceHolderCardView.swift; sourceTree = "<group>"; };
 		B6217E362CCAC7730080E858 /* PersonalInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationViewModel.swift; sourceTree = "<group>"; };
 		B6217E382CCAD6B80080E858 /* PersonalInformationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationModel.swift; sourceTree = "<group>"; };
 		B6217E3E2CCB1D1A0080E858 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			children = (
 				B61CE75B2CCDFC4F0088FEF4 /* HomeScreenViewController.swift */,
 				B61CE75F2CCDFC920088FEF4 /* HomeScreenTableViewCell.swift */,
+				B61DE9AD2CD04D8700C7142E /* PlaceHolderCardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 				B61CE70B2CCDEA3C0088FEF4 /* LoanApplicationCoreDataModel.xcdatamodeld in Sources */,
 				B61ABA242CCED79B00BCD3DC /* CoreDataService.swift in Sources */,
 				B61CE6FC2CCDA72B0088FEF4 /* ReviewAndSubmitViewCell.swift in Sources */,
+				B61DE9AE2CD04D8700C7142E /* PlaceHolderCardView.swift in Sources */,
 				B61CE75C2CCDFC4F0088FEF4 /* HomeScreenViewController.swift in Sources */,
 				B66068CD2CCD16CA00D08D20 /* ReviewAndSubmitViewModel.swift in Sources */,
 				B6B282AF2CC9CF4C008F492A /* AppDelegate.swift in Sources */,

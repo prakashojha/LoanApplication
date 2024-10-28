@@ -43,7 +43,7 @@ class HomeScreenViewModel {
             case .success(let data):
                 self?.loanApplicationDataCD = data
                 self?.createDataForView(loanData: data)
-                completion(.success(true))
+                completion(.success(self?.loanApplicationDataCD.count != 0))
             case .failure(let error):
                 completion(.failure(error))
             }

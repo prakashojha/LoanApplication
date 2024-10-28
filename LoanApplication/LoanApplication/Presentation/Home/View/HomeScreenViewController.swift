@@ -16,6 +16,8 @@ class HomeScreenViewController: UIViewController, ShowAlertProtocol {
         return tableView
     }()
     
+    private let placeholderView = PlaceholderCardView()
+    
     private lazy var newLoanButtonView: LAUIButton = {
         let button: LAUIButton = LAUIButton(configuration: .newLoanCustomButton)
         button.addTarget(self, action: #selector(onNewLoanButtonPressed), for: .touchUpInside)
@@ -54,7 +56,7 @@ class HomeScreenViewController: UIViewController, ShowAlertProtocol {
             switch(result) {
             case .success(_):
                 DispatchQueue.main.async {
-                    self?.tableView.reloadData()
+                    self?.reloadTable()
                 }
             case .failure(let error):
                 self?.showAlert(message: error.localizedDescription, completion: nil)
@@ -62,9 +64,31 @@ class HomeScreenViewController: UIViewController, ShowAlertProtocol {
         }
     }
     
+    func reloadTable() {
+        if viewModel.numberOfRowsInSection == 0 {
+            placeholderView.isHidden = false
+            tableView.isHidden = true
+        }
+        else {
+            placeholderView.isHidden = true
+            tableView.isHidden = false
+            DispatchQueue.main.async { [weak self ] in
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
     func setupUI() {
         setupTableView()
         setupNewLoanButtonView()
+        setupPlaceholderView()
+    }
+    
+    private func setupPlaceholderView() {
+        placeholderView.frame = CGRect(x: 0, y: 0, width: view.frame.width * 0.8, height: 200)
+        placeholderView.center = view.center
+        placeholderView.isHidden = true
+        view.addSubview(placeholderView)
     }
     
     func setupTableView() {
@@ -133,7 +157,7 @@ extension HomeScreenViewController: UITableViewDelegate {
                 case .success(_):
                     DispatchQueue.main.async {
                         self?.tableView.deleteRows(at: [indexPath], with: .automatic)
-                        self?.tableView.reloadData()
+                        self?.reloadTable()
                     }
                 case .failure(let error):
                     self?.showAlert(message: error.localizedDescription, completion: nil)

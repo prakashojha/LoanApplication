@@ -76,35 +76,5 @@ class CoreDataService<T: NSManagedObject, U: NSManagedObject>: DataServiceProtoc
         
     }
 
-    
-    
-//    func updateData(withId: UUID, object: U, completion: @escaping (Result<Bool, Error>) -> Void) {
-//
-//        let fetchRequest = NSFetchRequest<LoanApplicationCDModel>(entityName: "LoanApplicationCDModel")
-//
-//            // Use the predicate to find the specific loan by its UUID
-//            fetchRequest.predicate = NSPredicate(format: "identifier == %@", withId as CVarArg)
-//
-//            do {
-//                // Fetch the LoanApplicationCDModel
-//                if let loanToUpdate = try context.fetch(fetchRequest).first {
-//                    // Update the loan's properties using the provided data
-////                    for (key, value) in updatedLoanData {
-////                        loanToUpdate.setValue(value, forKey: key)
-////                    }
-//
-//                    // Save the context to persist changes
-//                    try context.save()
-//                    completion(.success(true))
-//                } else {
-//                    // No matching loan found
-//                    completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "Loan not found."])))
-//                }
-//            } catch {
-//                // Handle any errors during fetch or save
-//                completion(.failure(error))
-//            }
-//    }
-    
 }
 
