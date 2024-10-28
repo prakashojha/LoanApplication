@@ -44,11 +44,13 @@ class FinancialInformationView: UIView {
     private lazy var saveAndExit: LAUIButton = {
         let button: LAUIButton = LAUIButton(configuration: .navigationCustomButton(title: "Save and Exit", fontSize: 14))
         button.addTarget(self, action: #selector(onSaveAndExitPressed), for: .touchUpInside)
+        button.isEnabled = true
         return button
     }()
     
     private lazy var nextButton: LAUIButton = {
         let button = LAUIButton(configuration: .navigationCustomButton(title: "Next", fontSize: 14))
+        button.isEnabled = false
         button.addTarget(self, action: #selector(onNextButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -68,6 +70,7 @@ class FinancialInformationView: UIView {
         
         setupView()
         setupConstraints()
+        updateButtonState()
     }
     
     required init?(coder: NSCoder) {
@@ -144,6 +147,17 @@ extension FinancialInformationView: UITextFieldDelegate {
             textField.text = formattedText
         }
         return false
+    }
+    
+    func updateButtonState() {
+        let isAllFieldFilled = !(annualIncome.textField.text?.isEmpty ?? false) ||
+                               !(desiredLoanAmount.textField.text?.isEmpty ?? false)
+        
+        nextButton.isEnabled = isAllFieldFilled
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        updateButtonState()
     }
 }
 

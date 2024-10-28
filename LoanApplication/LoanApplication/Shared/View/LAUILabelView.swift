@@ -28,17 +28,17 @@ class LAUILabelView: UIView {
     
     private lazy var titleView: UILabel = {
         let view: UILabel = UILabel()
-        view.textColor = .systemOrange
+        view.textColor = UIColor.init(red: 33/255, green: 32/255, blue: 72/255, alpha: 1.0)
         view.text = title
-        view.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        view.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         return view
     }()
     
     private lazy var valueView: UILabel = {
         let view: UILabel = UILabel()
         view.text = value
-        view.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        view.textColor = .darkGray
+        view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        view.textColor = UIColor.init(red: 33/255, green: 36/255, blue: 74/255, alpha: 1.0)
         return view
     }()
     

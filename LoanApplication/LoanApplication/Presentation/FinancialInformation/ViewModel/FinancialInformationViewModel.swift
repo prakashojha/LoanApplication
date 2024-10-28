@@ -124,8 +124,7 @@ class FinancialInformationViewModel {
     
     //TODO: check ird number validity
     func onNextButtonPressed(_ annualIncome: String?, _ desiredLoanAmount: String?, _ irdNumber: String?) {
-        guard let validItems = verifyItemsValidity(annualIncome, desiredLoanAmount) else { return }
-        updateModel(validItems.0, validItems.1, irdNumber ?? "000-000-000")
+        _validateForNextAndSaveExit(annualIncome, desiredLoanAmount, irdNumber)
         coordinator?.loadNextScreen(fromScreen: .FinancialInformationScreen(model: model))
     }
     
@@ -134,7 +133,11 @@ class FinancialInformationViewModel {
     }
     
     func onSaveAndExitPressed(_ annualIncome: String?, _ desiredLoanAmount: String?, _ irdNumber: String?){
-        
+        _validateForNextAndSaveExit(annualIncome, desiredLoanAmount, irdNumber)
+        coordinator?.saveAndExit(fromScreen: .FinancialInformationScreen(model: model))
+    }
+    
+    private func _validateForNextAndSaveExit(_ annualIncome: String?, _ desiredLoanAmount: String?, _ irdNumber: String?){
         var income: String = ""
         var loan: String = ""
         
@@ -150,7 +153,5 @@ class FinancialInformationViewModel {
         }
         
         self.updateModel(income, loan, irdNumber ?? "")
-        coordinator?.saveAndExit(fromScreen: .FinancialInformationScreen(model: model))
-        
     }
 }

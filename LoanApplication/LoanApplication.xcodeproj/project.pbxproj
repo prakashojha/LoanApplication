@@ -189,6 +189,10 @@
 		B61CE7582CCDFA810088FEF4 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				B61ABA472CCFD67200BCD3DC /* PersonCDModel+CoreDataClass.swift */,
+				B61ABA482CCFD67200BCD3DC /* PersonCDModel+CoreDataProperties.swift */,
+				B61ABA492CCFD67200BCD3DC /* LoanApplicationCDModel+CoreDataClass.swift */,
+				B61ABA4A2CCFD67200BCD3DC /* LoanApplicationCDModel+CoreDataProperties.swift */,
 				B61CE7092CCDEA3C0088FEF4 /* LoanApplicationCoreDataModel.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -360,10 +364,6 @@
 		B6B282A22CC9CF4C008F492A = {
 			isa = PBXGroup;
 			children = (
-				B61ABA472CCFD67200BCD3DC /* PersonCDModel+CoreDataClass.swift */,
-				B61ABA482CCFD67200BCD3DC /* PersonCDModel+CoreDataProperties.swift */,
-				B61ABA492CCFD67200BCD3DC /* LoanApplicationCDModel+CoreDataClass.swift */,
-				B61ABA4A2CCFD67200BCD3DC /* LoanApplicationCDModel+CoreDataProperties.swift */,
 				B6B282AD2CC9CF4C008F492A /* LoanApplication */,
 				B6B282C42CC9CF50008F492A /* LoanApplicationTests */,
 				B6B282CE2CC9CF50008F492A /* LoanApplicationUITests */,

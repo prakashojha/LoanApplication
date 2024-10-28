@@ -33,7 +33,7 @@ class HomeScreenViewController: UIViewController, ShowAlertProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .cyan
+        self.view.backgroundColor = UIColor.init(red: 199/255, green: 255/255, blue: 246/255, alpha: 1.0)
         setupUI()
         fetchData()
     }

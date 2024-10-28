@@ -37,7 +37,7 @@ extension UIButton.Configuration {
         
         var config = UIButton.Configuration.filled()
         config.titleAlignment = .center
-        config.baseBackgroundColor = .systemBlue
+        config.baseBackgroundColor = UIColor.init(red: 26/255, green: 18/255, blue: 77/255, alpha: 1.0)
         config.baseForegroundColor = .white
         //config.background.strokeColor = .lightGray
         //config.background.strokeWidth = 2.0
@@ -53,7 +53,7 @@ extension UIButton.Configuration {
         
         var config = UIButton.Configuration.filled()
         config.titleAlignment = .center
-        config.baseBackgroundColor = .systemBlue
+        config.baseBackgroundColor = UIColor.init(red: 26/255, green: 18/255, blue: 77/255, alpha: 1.0)
         config.baseForegroundColor = .white
         config.cornerStyle = .capsule
         config.attributedTitle = AttributedString("New Loan", attributes: container)
