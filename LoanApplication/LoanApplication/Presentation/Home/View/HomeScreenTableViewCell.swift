@@ -7,13 +7,14 @@
 
 import UIKit
 
+
 class HomeScreenTableViewCell: UITableViewCell {
     
     var cellViewModel: HomeScreenModel? {
         didSet {
             DispatchQueue.main.async { [weak self ] in
                 self?.nameView.value = self?.cellViewModel?.fullName
-                self?.loanAmountView.value = self?.cellViewModel?.loanAmount
+                self?.loanAmountView.value = self?.cellViewModel?.loanAmount.NilWhenEmpty() ?? "$0"
                 self?.dateSubmittedView.value = self?.cellViewModel?.dateSubmitted
                 self?.statusView.value = self?.cellViewModel?.isComplete ?? false ? "Complete" : "InProgress"
             }

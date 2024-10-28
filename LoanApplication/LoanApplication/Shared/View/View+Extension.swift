@@ -36,3 +36,10 @@ extension ShowAlertProtocol where Self: UIViewController {
         self.present(alertController, animated: true)
     }
 }
+
+extension String {
+    func NilWhenEmpty() -> Self? {
+        if self.isEmpty { return nil }
+        return self
+    }
+}
