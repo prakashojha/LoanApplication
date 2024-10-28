@@ -137,8 +137,18 @@ class FinancialInformationView: UIView {
 extension FinancialInformationView: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        // Get the current text
+        guard let currentText = textField.text else { return true }
+        
+        // Check the maximum length of 11 characters
+        let newLength = currentText.count + string.count - range.length
+        if newLength > 11 {
+            return false
+        }
         // Get the updated text after the replacement
         let updatedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
+        
         guard viewModel.containValidAmount(updatedText: updatedText, replacementString: string) else { return false }
         
         // Directly update the text field to allow typing of decimal part
