@@ -21,11 +21,13 @@ final class PersonalInformationViewModel {
         self.coordinator = coordinator
     }
     
-    let genders: [String] = ["Male", "Female"]
+    let genders: [String] = ["Other", "Male", "Female"]
     let gapBetween: CGFloat = 15.0
     let viewHeight: CGFloat = 78.0
     let gapLeft: CGFloat = 0.0
     let gapRight: CGFloat = 0.0
+    
+    var selectedGenderIndex: Int = 0 // Default to first item
     
     var fullName: String {
         get { model.fullName }

@@ -35,7 +35,7 @@ struct LoanApplicationModel {
             fullName: String = "",
             email: String = "",
             phoneNumber: String = "",
-            gender: String = "Male",
+            gender: String = "",
             address: String = ""
         ) {
             self.fullName = fullName

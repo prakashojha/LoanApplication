@@ -45,9 +45,16 @@ class PersonalInformationView: UIView {
     
     private lazy var genderView: LAUIInputField = {
         let view: LAUIInputField = LAUIInputField(viewModel.gender, labelText: "Select Gender")
-        view.textField.text = viewModel.gender
         view.textField.inputView = pickerView
-        //view.textField.delegate = self
+        view.textField.delegate = self
+        if !viewModel.gender.isEmpty {
+            view.textField.text = viewModel.gender
+            viewModel.selectedGenderIndex = viewModel.genders.firstIndex(of: viewModel.gender) ?? 0
+        }
+        else {
+            view.textField.text = viewModel.genders[0]
+            viewModel.selectedGenderIndex = 0
+        }
         return view
     }()
     
@@ -171,8 +178,25 @@ extension PersonalInformationView: UITextFieldDelegate {
         return true
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // Disable changes for genderView's textField
+        if textField == genderView.textField {
+            return false // No manual entry or deletion allowed
+        }
+        return true
+    }
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         updateButtonState()
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == genderView.textField {
+            pickerView.selectRow(viewModel.selectedGenderIndex, inComponent: 0, animated: false)
+            // Display the picker view and prevent manual editing
+            return true // This allows the picker view to show up
+        }
+        return true
     }
     
     private func updateButtonState() {
@@ -197,6 +221,7 @@ extension PersonalInformationView: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        viewModel.selectedGenderIndex = row
         genderView.textField.text = viewModel.genders[row]
         genderView.textField.resignFirstResponder()
     }
